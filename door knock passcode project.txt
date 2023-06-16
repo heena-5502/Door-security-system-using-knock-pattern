@@ -1,0 +1,80 @@
+#include<LiquidCrystal.h>
+LiquidCrystal lcd(8,9,4,5,6,7);
+
+int pos = 0;    // variable to store the servo position
+int count=0;
+
+void setup() {
+lcd.begin(16,2);
+  
+lcd.clear();
+lcd.setCursor(0,0);
+lcd.print("loading!!!");
+delay(2000);
+lcd.clear();
+lcd.setCursor(0,0);
+lcd.print("S:ND");
+pinMode(10,OUTPUT);
+digitalWrite(10,LOW);
+pinMode(11,OUTPUT);
+digitalWrite(11,LOW);
+}
+
+void loop() {
+if(digitalRead(A0))
+{
+  
+  while(digitalRead(A0));
+  count+=1;
+  delay(100);
+
+for(int i=0;i<5000;i++)
+{
+  
+if(digitalRead(A0))
+{
+  while(digitalRead(A0));
+  count+=1;
+  delay(100);
+}  
+  delay(1);
+  if(count>=5)
+  {
+    
+lcd.setCursor(2,0);
+lcd.print("   ");
+
+lcd.setCursor(2,0);
+lcd.print("DT");
+
+    digitalWrite(10,HIGH);
+    delay(2000);
+    digitalWrite(10,LOW);
+  
+  
+lcd.setCursor(2,0);
+lcd.print("  ");
+lcd.setCursor(2,0);
+lcd.print("ND");
+break;
+    }
+  }
+  if(count<5)
+  {
+
+lcd.setCursor(2,0);
+lcd.print("   ");
+
+lcd.setCursor(2,0);
+lcd.print("ND");
+    digitalWrite(11,HIGH);
+    delay(2000);
+    digitalWrite(11,LOW);
+    count=0;
+    }
+  
+  }
+  
+count=0;
+
+}
